@@ -1,15 +1,25 @@
 Letter Matching Game - Project Roadmap
+
 Game Overview
+
 A Candy Crush-style word puzzle game where players swap adjacent letters in a 6x6 grid to form words horizontally or vertically. When a valid 4+ letter word is formed, it's removed from the grid, new letters drop down, and play continues until time runs out.
+
 Game Specifications
+
 Grid Size: 6x6 (36 letters)
+
 Interaction: Click two adjacent tiles to swap them
+
 Minimum Word Length: 4 letters
+
 Valid Directions: Horizontal and vertical only
+
 Game Mode: Timed - find as many words as possible before timer expires
+
 Scoring: Simple count + bonus for longer words
 
 Phase 1: Grid Foundation & Data Structures
+
 1.1 Grid Data Structure
 Design a 6x6 2D array structure to hold letter objects
 What letter is it? (A, B, C, etc.)
@@ -20,6 +30,7 @@ Create initial state structure in main game component
 we want random letters in a 6x6
 Is it selected right now? (yes/no)
 Is it matched? (yes/no)
+
 1.2 Game State Management
 Set up state for: grid, selectedTile, score, foundWords, timer, gameStatus, isProcessing
 Choose state management approach (useState/useReducer/Context)

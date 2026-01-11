@@ -30,6 +30,7 @@ export const LETTERS = [
         id: 1,
         name: 'A',
         src: A,
+        vowel: true,
     },
     {
         id: 2,
@@ -50,6 +51,7 @@ export const LETTERS = [
         id: 5,
         name: 'E',
         src: E,
+        vowel: true,
     },
     {
         id: 6,
@@ -70,6 +72,7 @@ export const LETTERS = [
         id: 9,
         name: 'I',
         src: I,
+        vowel: true,
     },
     {
         id: 10,
@@ -100,6 +103,7 @@ export const LETTERS = [
         id: 15,
         name: 'O',
         src: O,
+        vowel: true,
     },
     {
         id: 16,
@@ -130,6 +134,7 @@ export const LETTERS = [
         id: 21,
         name: 'U',
         src: U,
+        vowel: true,
     },
     {
         id: 22,
@@ -150,6 +155,7 @@ export const LETTERS = [
         id: 25,
         name: 'Y',
         src: Y,
+        vowel: true,
     },
     {
         id: 26,
