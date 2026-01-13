@@ -6,9 +6,18 @@ import './index.css'
 
 function App() {
     const [grid, setGrid] = useState(gridGenerator())
+    const [selectedTile, setSelectedTile] = useState(null)
+
+    const onTileClick = (row, col) => {
+        setSelectedTile({ row: row, col: col})
+        console.log(row, col) 
+    }
 
     return (
-        <Grid grid={grid}/>
+        <Grid grid={grid} 
+        onTileClick={onTileClick}
+        selectedTile={selectedTile}
+        />
     )
 }
 

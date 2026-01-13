@@ -28,10 +28,10 @@ const gridGenerator = () => {
         }
         grid.push(rowArray)
     }
-    console.log(vowels)
-    console.log(consonants)
-    console.log(getRandomLetter())
-    console.log(grid)
+    // console.log(vowels)
+    // console.log(consonants)
+    // console.log(getRandomLetter())
+    // console.log(grid)
 
     return grid
 }
