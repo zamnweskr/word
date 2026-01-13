@@ -95,7 +95,7 @@ keep time, maybe decrease?
     
     Our next variable 'randomChosen' is set up to pull a random letter from either the 'vowels' or 'consonants' array, depending on what array was chosen to have a letter pulled from it.
 
-    Finally, we return the letter that was randomly chosen, from a randomly chosen array of either consonants or vowels. The reasoning for this logic is to preventthe game from populating a bunch of letters that you can't make words from
+    Finally, we return the letter that was randomly chosen, from a randomly chosen array of either consonants or vowels. The reasoning for this logic is to preventthe game from populating a bunch of letters that you can't make words from.
 
 Phase 2: Core Components
 2.1 LetterTile Component

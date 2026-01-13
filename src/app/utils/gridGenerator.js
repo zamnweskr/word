@@ -32,6 +32,8 @@ const gridGenerator = () => {
     console.log(vowels)
     console.log(consonants)
     console.log(getRandomLetter())
+
+    return grid
 }
 
 export default gridGenerator

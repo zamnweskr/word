@@ -1,6 +1,7 @@
 import gridGenerator from "../utils/gridGenerator"
 
-function Grid() {
+function Grid({ grid }) {
+    console.log(grid)
   return (
     <div>
       <h1>Grid Component</h1>

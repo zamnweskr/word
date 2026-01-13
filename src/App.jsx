@@ -1,13 +1,15 @@
 import Grid from './app/components/grid.jsx';
+import gridGenerator from './app/utils/gridGenerator.js';
+import { useState } from 'react';
 import './App.css'
 import './index.css'
-import gridGenerator from './app/utils/gridGenerator.js';
 
 function App() {
-  gridGenerator()
-  return (
-    <Grid />
-  )
+    const [grid, setGrid] = useState(gridGenerator())
+
+    return (
+        <Grid grid={grid}/>
+    )
 }
 
 export default App
