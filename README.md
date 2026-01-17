@@ -98,23 +98,32 @@ keep time, maybe decrease?
     Finally, we return the letter that was randomly chosen, from a randomly chosen array of either consonants or vowels. The reasoning for this logic is to preventthe game from populating a bunch of letters that you can't make words from.
 
 Phase 2: Core Components
+
 2.1 LetterTile Component
+
 Display individual letter image
 Handle click events
 Show different visual states (normal, selected, matched)
+
 2.2 Grid Component
+
 Render 6x6 grid of LetterTile components
 Use CSS Grid/Flexbox for layout
 Pass click handlers to tiles
 
 Phase 3: Swap Mechanics
+
 3.1 Tile Selection Logic
+
 Click first tile to select it
 Visual highlight on selected tile
 Click again to deselect
+
 3.2 Adjacency Validation
+
 Check if two tiles are adjacent (up/down/left/right only)
 No diagonal swaps allowed
+
 3.3 Swap Execution
 Click second adjacent tile to swap positions
 If not adjacent, show feedback and deselect

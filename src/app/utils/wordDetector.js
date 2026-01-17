@@ -1,9 +1,9 @@
 async function checkIfWord(line) {
   try {
     const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${line}`);
-    
+
     if (response.ok) {
-       await response.json();
+      await response.json();
       console.log(`"${line}" is a valid word!`);
       return true;
     } else {
