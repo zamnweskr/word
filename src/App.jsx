@@ -1,9 +1,11 @@
 import Grid from './app/components/grid.jsx';
 import gridGenerator from './app/utils/gridGenerator.js';
-import areAdjacent from './app/utils/gridHelpers.js';
+import { wordDetector } from './app/utils/wordDetector.js';
+import { areAdjacent, createHWordString, createVWordString, getSubstrings } from './app/utils/gridHelpers.js';
 import { useState } from 'react';
 import './App.css'
 import './index.css'
+
 
 function App() {
     const [grid, setGrid] = useState(gridGenerator())
@@ -24,6 +26,9 @@ function App() {
             tile1.col = col
             setGrid(newGrid)
             setSelectedTile(null)
+            wordDetector(newGrid).then(words => console.log('Found words: ', words))
+            console.log(createHWordString(newGrid))
+            console.log(createVWordString(newGrid))
         }
         console.log(row, col)
     }
