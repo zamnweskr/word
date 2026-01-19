@@ -1,5 +1,5 @@
 import gridGenerator from "../utils/gridGenerator"
-import './grid.css'
+import '../features/game/grid.css'
 
 function Grid({ grid, onTileClick, selectedTile }) {
 
