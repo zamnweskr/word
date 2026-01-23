@@ -3,7 +3,7 @@ import Grid from './app/components/Grid.jsx'
 import { wordDetector } from './app/utils/wordDetector.js';
 import { areAdjacent } from './app/utils/gridHelpers.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedTile, setGrid } from './app/features/game/gameSlice.js';
+import { setSelectedTile, setGrid, setFoundWords } from './app/features/game/gameSlice.js';
 import './App.css'
 import './index.css'
 
@@ -12,6 +12,8 @@ function App() {
     const dispatch = useDispatch()
     const grid = useSelector((state) => state.game.grid)
     const selectedTile = useSelector((state) => state.game.selectedTile)
+    const targetWords = useSelector((state) => state.game.targetWords)
+    const foundWords = useSelector((state) => state.game.foundWords)
 
     const onTileClick = (row, col) => {
         if (selectedTile === null) {
@@ -28,20 +30,27 @@ function App() {
             newGrid[row][col] = tile1
             dispatch(setGrid(newGrid))
             dispatch(setSelectedTile(null))
-            wordDetector(newGrid).then(words => console.log('Found words: ', words))
-        }
 
+            wordDetector(newGrid).then(words => {
+                const areWords = words.filter(word =>
+                    targetWords.includes(word))
+                if (areWords.length > 0) {
+                    console.log("FOUND TARGET WORDS: ", areWords)
+                    dispatch(setFoundWords(areWords))
+                }
+            })
+        }
     }
 
     return (
         <>
-        <TargetWords />
-        <Grid grid={grid}
-            onTileClick={onTileClick}
-            selectedTile={selectedTile}
-        />
+            <TargetWords />
+            <Grid grid={grid}
+                onTileClick={onTileClick}
+                selectedTile={selectedTile}
+            />
         </>
-        
+
     )
 }
 

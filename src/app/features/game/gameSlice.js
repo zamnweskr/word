@@ -20,9 +20,12 @@ const gameSlice = createSlice({
         },
         setSelectedTile: (state, action) => {
             state.selectedTile = action.payload
+        },
+        setFoundWords: (state, action) => {
+            state.foundWords = action.payload
         }
     }
 })
 
-export const { setGrid, setSelectedTile } = gameSlice.actions
+export const { setGrid, setSelectedTile, setFoundWords } = gameSlice.actions
 export const gameReducer = gameSlice.reducer

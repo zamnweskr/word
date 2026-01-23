@@ -25,3 +25,7 @@
     background-color: #b696a3;
     border-color: #ffaacc;
 }
+.found-word {
+    text-decoration: line-through;
+    color: red;
+}
