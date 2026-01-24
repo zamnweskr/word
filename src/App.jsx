@@ -4,6 +4,7 @@ import { wordDetector } from './app/utils/wordDetector.js';
 import { areAdjacent } from './app/utils/gridHelpers.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedTile, setGrid, setFoundWords } from './app/features/game/gameSlice.js';
+import GameTimer from './app/components/GameTimer';
 import './App.css'
 import './index.css'
 
@@ -14,6 +15,7 @@ function App() {
     const selectedTile = useSelector((state) => state.game.selectedTile)
     const targetWords = useSelector((state) => state.game.targetWords)
     const foundWords = useSelector((state) => state.game.foundWords)
+    const initialGameTime = 120
 
     const onTileClick = (row, col) => {
         if (selectedTile === null) {
@@ -45,6 +47,7 @@ function App() {
     return (
         <>
             <TargetWords />
+            <GameTimer initialSeconds={initialGameTime} />
             <Grid grid={grid}
                 onTileClick={onTileClick}
                 selectedTile={selectedTile}
