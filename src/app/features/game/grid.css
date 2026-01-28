@@ -25,6 +25,19 @@
     background-color: #b696a3;
     border-color: #ffaacc;
 }
+.letter-tile.tile-selected {
+    background-color: #b696a3;
+    border-color: #ffaacc;
+}
+.empty-tile {
+    margin: 15px;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 5px solid transparent;
+    border-radius: 10%;
+}
 .found-word {
     text-decoration: line-through;
     color: red;

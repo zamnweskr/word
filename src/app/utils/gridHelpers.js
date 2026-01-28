@@ -23,7 +23,10 @@ export const getSubstrings = (line) => {
     const substrings = []
     for (let length = 4; length <= 6; length++) {
         for (let start = 0; start <= line.length - length; start++) {
-            substrings.push(line.slice(start, start + length))
+            substrings.push({
+                word: line.slice(start, start + length),
+                startIndex: start
+            })
         }
     }
     return substrings

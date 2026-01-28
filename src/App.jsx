@@ -1,9 +1,9 @@
 import TargetWords from './app/components/TargetWords.jsx';
 import Grid from './app/components/Grid.jsx'
-import { wordDetector } from './app/utils/wordDetector.js';
+import { detectWords } from './app/utils/detectWords.js';
 import { areAdjacent } from './app/utils/gridHelpers.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedTile, setGrid, setFoundWords } from './app/features/game/gameSlice.js';
+import { setSelectedTile, setGrid, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords } from './app/features/game/gameSlice.js';
 import GameTimer from './app/components/GameTimer';
 import './App.css'
 import './index.css'
@@ -15,6 +15,8 @@ function App() {
     const selectedTile = useSelector((state) => state.game.selectedTile)
     const targetWords = useSelector((state) => state.game.targetWords)
     const foundWords = useSelector((state) => state.game.foundWords)
+    const completedWords = useSelector((state) => state.game.completedWords)
+    const gameWon = useSelector((state) => state.game.gameWon)
     const initialGameTime = 120
 
     const onTileClick = (row, col) => {
@@ -26,19 +28,32 @@ function App() {
             const tile2 = { ...newGrid[row][col] }
             tile1.row = row
             tile1.col = col
+            tile1.id = `${row}-${col}`
             tile2.row = selectedTile.row
             tile2.col = selectedTile.col
+            tile2.id = `${selectedTile.row}-${selectedTile.col}`
             newGrid[selectedTile.row][selectedTile.col] = tile2
             newGrid[row][col] = tile1
             dispatch(setGrid(newGrid))
             dispatch(setSelectedTile(null))
 
-            wordDetector(newGrid).then(words => {
+            detectWords(newGrid).then(words => {
                 const areWords = words.filter(word =>
-                    targetWords.includes(word))
+                    targetWords.includes(word.word))
                 if (areWords.length > 0) {
                     console.log("FOUND TARGET WORDS: ", areWords)
                     dispatch(setFoundWords(areWords))
+                    dispatch(addCompletedWords())
+                    setTimeout(() => {
+                        dispatch(removeMatchedLetters())
+                        setTimeout(() => {
+                            dispatch(letterDrop())
+                            setTimeout(() => {
+                                dispatch(refillLetters())
+                                dispatch(setFoundWords([]))
+                            }, 600)
+                        }, 300)
+                    }, 1000)
                 }
             })
         }
@@ -51,6 +66,7 @@ function App() {
             <Grid grid={grid}
                 onTileClick={onTileClick}
                 selectedTile={selectedTile}
+                foundWords={foundWords}
             />
         </>
 

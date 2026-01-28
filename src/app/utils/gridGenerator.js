@@ -43,6 +43,7 @@ const gridGenerator = (targetWords) => {
                 row,
                 col,
             }
+            if (letterCell.id === letterCell.id)
             rowArray.push(letterCell)
         }
         grid.push(rowArray)
