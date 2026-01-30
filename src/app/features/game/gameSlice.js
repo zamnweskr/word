@@ -10,7 +10,9 @@ const initialState = {
     grid: gridGenerator(words),
     selectedTile: null,
     foundWords: [],
-    completedWords: []
+    completedWords: [],
+    gameWon: false,
+    gameKey: 0
 }
 
 const gameSlice = createSlice({
@@ -76,11 +78,21 @@ const gameSlice = createSlice({
             const newWords = state.foundWords.map(fw => fw.word)
             state.completedWords = [...state.completedWords, ...newWords]
         },
-        setGameWon: (state) => {
-            state.gameWon = completedWords.length === targetWords.length && completedWords.length > 0
+        setGameWon: (state, action) => {
+            state.gameWon = action.payload
+        },
+        resetGame: (state) => {
+            const newWords = getRandomWords(5)
+            state.targetWords = newWords
+            state.grid = gridGenerator(newWords)
+            state.selectedTile = null
+            state.foundWords = []
+            state.completedWords = []
+            state.gameWon = false
+            state.gameKey = state.gameKey + 1
         }
     }
 })
 
-export const { setGrid, setSelectedTile, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords } = gameSlice.actions
+export const { setGrid, setSelectedTile, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords, setGameWon, resetGame } = gameSlice.actions
 export const gameReducer = gameSlice.reducer

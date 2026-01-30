@@ -3,8 +3,10 @@ import Grid from './app/components/Grid.jsx'
 import { detectWords } from './app/utils/detectWords.js';
 import { areAdjacent } from './app/utils/gridHelpers.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedTile, setGrid, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords } from './app/features/game/gameSlice.js';
+import { setSelectedTile, setGrid, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords, setGameWon } from './app/features/game/gameSlice.js';
+import GameWon from './app/components/GameWon.jsx';
 import GameTimer from './app/components/GameTimer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import './index.css'
 
@@ -17,6 +19,7 @@ function App() {
     const foundWords = useSelector((state) => state.game.foundWords)
     const completedWords = useSelector((state) => state.game.completedWords)
     const gameWon = useSelector((state) => state.game.gameWon)
+    const gameKey = useSelector((state) => state.game.gameKey)
     const initialGameTime = 120
 
     const onTileClick = (row, col) => {
@@ -51,6 +54,11 @@ function App() {
                             setTimeout(() => {
                                 dispatch(refillLetters())
                                 dispatch(setFoundWords([]))
+                                if (completedWords.length + areWords.length >= targetWords.length) {
+                                    setTimeout(() => {
+                                        dispatch(setGameWon(true))
+                                    }, 800)
+                                }
                             }, 600)
                         }, 300)
                     }, 1000)
@@ -61,8 +69,9 @@ function App() {
 
     return (
         <>
+            <GameWon />
             <TargetWords />
-            <GameTimer initialSeconds={initialGameTime} />
+            <GameTimer key={gameKey} initialSeconds={initialGameTime} />
             <Grid grid={grid}
                 onTileClick={onTileClick}
                 selectedTile={selectedTile}
