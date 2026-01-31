@@ -3,14 +3,14 @@ import Grid from './app/components/Grid.jsx'
 import { detectWords } from './app/utils/detectWords.js';
 import { areAdjacent } from './app/utils/gridHelpers.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedTile, setGrid, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords, setGameWon } from './app/features/game/gameSlice.js';
+import { setSelectedTile, setGrid, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords, setGameWon, startGameHandler } from './app/features/game/gameSlice.js';
 import GameWon from './app/components/GameWon.jsx';
 import GameTimer from './app/components/GameTimer';
 import StartScreen from './app/components/StartScreen'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import './index.css'
-import React, { useState } from 'react';
+
 
 
 function App() {
@@ -22,12 +22,12 @@ function App() {
     const completedWords = useSelector((state) => state.game.completedWords)
     const gameWon = useSelector((state) => state.game.gameWon)
     const gameKey = useSelector((state) => state.game.gameKey)
+    const isGameStarted = useSelector((state) => state.game.isGameStarted)
     const initialGameTime = 120
-    const [isGameStarted, setIsGameStarted] = useState(false);
-  
-    const startGameHandler = () => {
-     setIsGameStarted(true);
-     };
+
+    // const startGameHandler = () => {
+    //  setIsGameStarted(true);
+    //  };
 
     const onTileClick = (row, col) => {
         if (selectedTile === null) {
@@ -60,38 +60,37 @@ function App() {
                         setTimeout(() => {
                             dispatch(letterDrop())
                             dispatch(refillLetters())
-                            
                         }, 300)
                         setTimeout(() => {
-                                if (completedWords.length + areWords.length >= targetWords.length) {
-                                    setTimeout(() => {
-                                        dispatch(setGameWon(true))
-                                    }, 500)
-                                }
-                            }, 300)
+                            if (completedWords.length + areWords.length >= targetWords.length) {
+                                setTimeout(() => {
+                                    dispatch(setGameWon(true))
+                                }, 500)
+                            }
+                        }, 300)
                     }, 1000)
                 }
             })
         }
     }
-    
+
 
     return (
         <>
-        {isGameStarted ? (
-        <>
-            <GameWon />
-            <TargetWords />
-            <GameTimer key={gameKey} initialSeconds={initialGameTime} />
-            <Grid grid={grid}
-                onTileClick={onTileClick}
-                selectedTile={selectedTile}
-                foundWords={foundWords}
-            />
-        </>
-                      ) : (
-        <StartScreen onStartGame={startGameHandler} />
-        )}
+            {isGameStarted ? (
+                <>
+                    <GameWon />
+                    <TargetWords />
+                    <GameTimer key={gameKey} initialSeconds={initialGameTime} />
+                    <Grid grid={grid}
+                        onTileClick={onTileClick}
+                        selectedTile={selectedTile}
+                        foundWords={foundWords}
+                    />
+                </>
+            ) : (
+                <StartScreen onStartGame={() => dispatch(startGameHandler())} />
+            )}
         </>
     )
 }

@@ -81,6 +81,9 @@ const gameSlice = createSlice({
         setGameWon: (state, action) => {
             state.gameWon = action.payload
         },
+        setIsGameStarted: (state, action) => {
+            state.isGameStarted = action.payload
+        },
         resetGame: (state) => {
             const newWords = getRandomWords(5)
             state.targetWords = newWords
@@ -90,9 +93,12 @@ const gameSlice = createSlice({
             state.completedWords = []
             state.gameWon = false
             state.gameKey = state.gameKey + 1
+        },
+        startGameHandler: (state) => {
+            state.isGameStarted = true
         }
     }
 })
 
-export const { setGrid, setSelectedTile, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords, setGameWon, resetGame } = gameSlice.actions
+export const { setGrid, setSelectedTile, setFoundWords, removeMatchedLetters, letterDrop, refillLetters, addCompletedWords, setGameWon, resetGame, startGameHandler, setIsGameStarted } = gameSlice.actions
 export const gameReducer = gameSlice.reducer

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Modal, ModalBody, ModalHeader, Button, FormGroup, Label, ModalFooter} from 'reactstrap'
-import { setGameWon } from "../features/game/gameSlice";
+import { setGameWon, setIsGameStarted } from "../features/game/gameSlice";
 import { resetGame } from "../features/game/gameSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,7 +22,7 @@ function GameWon() {
                     <Button color='primary' onClick={() => dispatch(resetGame())}>
                         Try Again?
                     </Button>
-                    <Button color='secondary' onClick={() => dispatch(setGameWon(false))}>
+                    <Button color='secondary' onClick={() => dispatch(setIsGameStarted(false))}>
                         I'm Good!
                     </Button>
                 </ModalFooter>
