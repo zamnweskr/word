@@ -51,23 +51,24 @@ function App() {
                 const areWords = words.filter(word =>
                     targetWords.includes(word.word))
                 if (areWords.length > 0) {
-                    console.log("FOUND TARGET WORDS: ", areWords)
+                    // console.log("FOUND TARGET WORDS: ", areWords)
                     dispatch(setFoundWords(areWords))
                     dispatch(addCompletedWords())
                     setTimeout(() => {
                         dispatch(removeMatchedLetters())
+                        dispatch(setFoundWords([]))
                         setTimeout(() => {
                             dispatch(letterDrop())
-                            setTimeout(() => {
-                                dispatch(refillLetters())
-                                dispatch(setFoundWords([]))
+                            dispatch(refillLetters())
+                            
+                        }, 300)
+                        setTimeout(() => {
                                 if (completedWords.length + areWords.length >= targetWords.length) {
                                     setTimeout(() => {
                                         dispatch(setGameWon(true))
-                                    }, 800)
+                                    }, 500)
                                 }
-                            }, 600)
-                        }, 300)
+                            }, 300)
                     }, 1000)
                 }
             })
